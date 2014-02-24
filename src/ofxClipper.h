@@ -51,7 +51,7 @@ enum ofxClipperJoinType {
     OFX_CLIPPER_JOINTYPE_MITER  = ClipperLib::jtMiter, 
 };
 
-class ofxClipper : public ClipperLib::Clipper {
+class ofxClipper : public ClipperLib::ClipperOffset {
 public:
     ofxClipper();
     virtual ~ofxClipper();
@@ -98,13 +98,13 @@ public:
 
 //protected:
     // conversion functions
-    static void ofPath_to_Polygons(ofPath& path, ClipperLib::Polygons& polygons);
-    static ClipperLib::Polygon ofPolyline_to_Polygon(ofPolyline& polyline);
-    static void ofxPolylines_to_Polygons(ofxPolylines& polylines, ClipperLib::Polygons& polygons);
+    static void ofPath_to_Polygons(ofPath& path, ClipperLib::Paths& polygons);
+    static ClipperLib::Path ofPolyline_to_Polygon(ofPolyline& polyline);
+    static void ofxPolylines_to_Polygons(ofxPolylines& polylines, ClipperLib::Paths& polygons);
                 
                                       
-    static ofPolyline polygon_to_ofPolyline(ClipperLib::Polygon& polygon);
-    static void polygons_to_ofxPolylines(ClipperLib::Polygons& polygons, ofxPolylines& polylines);
+    static ofPolyline polygon_to_ofPolyline(ClipperLib::Path& polygon);
+    static void polygons_to_ofxPolylines(ClipperLib::Paths& polygons, ofxPolylines& polylines);
 
     static ClipperLib::PolyFillType convertWindingMode(ofPolyWindingMode windingMode);
 

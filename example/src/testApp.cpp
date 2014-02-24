@@ -45,14 +45,18 @@ void testApp::setup(){
     simplifyPanel.setup("Simplify","settings.xml", ofGetWidth()-100,10);
     simplifyPanel.add(simplifyPath.setup("num vertices",10,3,40));
     simplifyPath.addListener(this,&testApp::genSimplifyPath);
+
+    int sp = simplifyPath;
+    genSimplifyPath(sp);
     
-    genSimplifyPath(simplifyPath);
     bSimplifyPathNeedsUpdate = true;
 
-    
+    int ncs = nClipSubjects;
     // generate some initial data
-    genSubjects(nClipSubjects);
-    genMasks(nClipMasks);
+    genSubjects(ncs);
+
+    int ncm = nClipMasks;
+    genMasks(ncm);
 
     mclip = useMouseClipper;
     
@@ -391,8 +395,9 @@ void testApp::subjectPolyType(int & ct) {
         default:
             break;
     }
-    
-    genSubjects(nClipSubjects);
+
+    int ncs = nClipSubjects;
+    genSubjects(ncs);
     bNeedsUpdate = true;
 }
 
@@ -414,8 +419,8 @@ void testApp::maskPolyType(int & ct) {
         default:
             break;
     }
-    
-    genMasks(nClipMasks);
+    int i = nClipMasks;
+    genMasks(i);
     bNeedsUpdate = true;
 }
 
@@ -428,9 +433,10 @@ void testApp::offsetDelta(float & f) {
 void testApp::mouseClipper(bool & b) {
 
     mclip = b;
-    
+
+    int i = nClipMasks;
     if(!mclip) {
-        genMasks(nClipMasks);
+        genMasks(i);
     }
     
     bNeedsUpdate = true;
