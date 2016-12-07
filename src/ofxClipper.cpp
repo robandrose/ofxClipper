@@ -126,7 +126,10 @@ void ofxClipper::clear() {
 
 
 void ofxClipper::ofPath_to_Polygons(ofPath& path,ClipperLib::Paths& polygons) {
-    return ofxPolylines_to_Polygons(path.getOutline(),polygons);
+    ofxPolylines poli=path.getOutline();
+    return ofxPolylines_to_Polygons(poli,polygons);
+    
+    
 }
 
 ClipperLib::Path ofxClipper::ofPolyline_to_Polygon(ofPolyline& polyline) {
@@ -174,7 +177,7 @@ void ofxClipper::polygons_to_ofxPolylines(ClipperLib::Paths& polygons,ofxPolylin
 void ofxClipper::polygons_to_ofPath(ClipperLib::Paths& polygons,ofPath& path) {
     vector<ClipperLib::Path>::iterator iter;
     for(iter = polygons.begin(); iter != polygons.end(); iter++) {
-        path.getOutline().push_back(polygon_to_ofPolyline((*iter)));
+       // path.getOutline().push_back(polygon_to_ofPolyline((*iter)));
     }
 }
 
